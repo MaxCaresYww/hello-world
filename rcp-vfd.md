@@ -12,22 +12,24 @@ VFd installation can be divided into following steps:
 
 ### Environment Overview
 
-* Host: `
+* Host: 
+```bash
     cloudinfra@compute2:~$ lsb_release -a
     No LSB modules are available.
     Distributor ID: Ubuntu
     Description:    Ubuntu 16.04.2 LTS
     Release:        16.04
     Codename:       xenial
-    `
-* Kernel version: `
+```
+* Kernel version: 
+```bash
     cloudinfra@compute2:~$ uname -a
     Linux compute2 4.4.0-62-generic #83-Ubuntu SMP Wed Jan 18 14:10:15 UTC 2017 x86_64 x86_64 x86_64 GNU/Linux
-    `
+```
 
 ### Build DPDK
 
-You could directly clone DPDK repository from Github if your target node has Internet connectivity. Otherwise you could download compressed DPDK package from [dpdk website](dpdk.org) and upload that to target environment. In this case, we use the first option.
+You could directly clone DPDK repository from Github if your target node has Internet connectivity. Otherwise you could download compressed DPDK package from [dpdk website](http://www.dpdk.org) and upload that to target environment. In this case, we use the first option.
 
 1. Create a directory; assume that is $HOME/build(`mkdir -p $HOME/build`)
 2. Switch to the build directory
