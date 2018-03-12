@@ -1,6 +1,6 @@
 ## VFd installation guide
 
-VFd installation can be divided into following steps:
+SR-IOV Virtual Function driver (VFd) installation can be divided into following steps:
 
 * Build DPDK
 * Build VFd
@@ -44,3 +44,25 @@ You could directly clone DPDK repository from Github if your target node has Int
 
 Please note for successful installation, you probably need install some packages like gcc, make, libnuma-dev.
       
+### Build VFd
+
+The way to build VFd here is to compile from source code. If you have a package (.deb etc.) or binary, this step could be skipped.
+
+1. Switch to the build directory. (e.g. $HOME)
+2. Run `git clone https://github.com/att/vfd.git`
+3. Switch to the $HOME/vfd/src directory and run `make`
+       * It will clone any third party libraries and build them as needed (so Internet connectivity is needed)
+4. (optional) Switch to $HOME/vfd/src/system and `make vreq` to build vreq tool
+5. `mv $HOME/vfd/src/vfd/build/vfd /usr/bin/` && `mv $HOME/vfd/src/system/iplex /usr/bin/`
+6. Verify via `/usr/bin/vfd -?`
+
+### Create VFs
+
+1. `$Home/build/dpdk/usertools/dpdk-devbind.py -s` show the status of the interfaces
+2. Bind the interface with `igb_uio` driver by `$Home/build/dpdk/usertools/dpdk-devbind.py -b igb_uio 0000:01:00.1`. 
+       * Note pre-condition is the interface should have no VFs created in this time.
+3. Create VFs via `echo 32 > /sys/devices/pci0000:00/0000:00:03.0/0000:01:00.1/max_vfs`
+
+### Create The Main Configuration
+
+
